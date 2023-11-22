@@ -1,5 +1,6 @@
 using LinkShortener.Data;
 using LinkShortener.Data.Repositories;
+using LinkShortener.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddDbContext<ApplicationContext>();
 
 builder.Services.AddScoped<UrlRepository>();
 builder.Services.AddScoped<ApplicationContext>();
+builder.Services.AddScoped<LinkShorterService>();
 
 var app = builder.Build();
 
@@ -25,8 +27,17 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(routes =>
+{
+    routes.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+    
+    routes.MapControllerRoute(
+        name: "default",
+        pattern: "{shortLink}",
+        defaults: new { controller = "Home", action = "Index" });
+
+});
 
 app.Run();
