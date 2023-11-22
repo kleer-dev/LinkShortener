@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using LinkShortener.Data;
 using LinkShortener.Data.Entities;
+using LinkShortener.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using LinkShortener.Models;
 
@@ -9,26 +10,14 @@ namespace LinkShortener.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly ApplicationContext _applicationContext;
 
-    public HomeController(ILogger<HomeController> logger, ApplicationContext applicationContext)
+    public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
-        _applicationContext = applicationContext;
     }
 
     public IActionResult Index()
     {
-        _applicationContext.Urls.Add(new Url
-        {
-            LongUrl = "wdwd",
-            ShortenedUrl = "efef",
-            TransitionCount = 2,
-            DateOfCreation = DateTime.Now
-        });
-
-        _applicationContext.SaveChanges();
-        
         return View();
     }
 
