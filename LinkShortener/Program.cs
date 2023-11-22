@@ -1,6 +1,22 @@
+using LinkShortener.Data;
+using LinkShortener.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<UrlRepository>();
+builder.Services.AddScoped<ApplicationContext>();
+
+builder.Services.AddDbContext<ApplicationContext>(options =>
+{
+    options.UseMySQL(builder.Configuration["Db:ConnectionString"] ?? string.Empty, 
+        opt =>
+    {
+        opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+    });
+});
 
 var app = builder.Build();
 
