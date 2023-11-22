@@ -7,8 +7,7 @@ public sealed class ApplicationContext : DbContext
 {
     public DbSet<Url> Urls { get; set; } = null!;
 
-    public ApplicationContext(DbContextOptions<ApplicationContext> options)
-        : base(options)
+    public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
         Database.EnsureCreated();
     }

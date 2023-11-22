@@ -11,11 +11,8 @@ builder.Services.AddScoped<ApplicationContext>();
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
 {
-    options.UseMySQL(builder.Configuration["Db:ConnectionString"] ?? string.Empty, 
-        opt =>
-    {
-        opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
-    });
+    var connectionString = builder.Configuration["Db:ConnectionString"];
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
 var app = builder.Build();
