@@ -27,17 +27,13 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.UseEndpoints(routes =>
-{
-    routes.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
     
-    routes.MapControllerRoute(
-        name: "default",
-        pattern: "{shortLink}",
-        defaults: new { controller = "Home", action = "Index" });
-
-});
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{shortLink}",
+    defaults: new { controller = "Home", action = "ShortLink" });
 
 app.Run();

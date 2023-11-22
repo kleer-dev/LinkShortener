@@ -21,8 +21,14 @@
     {
         <tr>
             <td>@url.Id</td>
-            <td>@url.LongUrl</td>
-            <td>@url.ShortenedUrl</td>
+            <td><a href="@url.LongUrl">@url.LongUrl</a></td>
+            <td>
+                <a asp-controller="Home"
+                   asp-action="ShortLink"
+                   asp-route-shortLink="@url.ShortenedUrl">
+                    @url.ShortenedUrl
+                </a>
+            </td>
             <td>@url.DateOfCreation</td>
             <td>@url.TransitionCount</td>
             <td>

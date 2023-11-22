@@ -24,7 +24,7 @@ public class UrlRepository(ApplicationContext dbContext) : IRepository<Url>
         dbContext.SaveChanges();
     }
 
-    public async Task<List<Url>> GetAll() => await dbContext.Urls.ToListAsync();
+    public async Task<IEnumerable<Url>> GetAll() => await dbContext.Urls.ToListAsync();
 
     public Url? GetById(int id) =>
         dbContext.Urls.FirstOrDefault(url => url.Id == id);

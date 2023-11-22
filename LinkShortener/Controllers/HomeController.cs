@@ -5,8 +5,7 @@ namespace LinkShortener.Controllers;
 
 public class HomeController(UrlRepository urlRepository) : Controller
 {
-    public async Task<ViewResult> Index() =>
-        View(await urlRepository.GetAll());
+    public async Task<ViewResult> Index() => View(await urlRepository.GetAll());
 
     public IActionResult Delete(int id)
     {
@@ -16,7 +15,18 @@ public class HomeController(UrlRepository urlRepository) : Controller
         {
             urlRepository.Delete(url);
         }
-        
+
         return RedirectToAction("Index");
+    }
+
+    public async Task<IActionResult> ShortLink(string shortLink)
+    {
+        var url = (await urlRepository.GetAll())
+            .First(link => link.ShortenedUrl == shortLink);
+
+        url.TransitionCount++;
+        urlRepository.Update(url);
+        
+        return Redirect(url.LongUrl);
     }
 }
