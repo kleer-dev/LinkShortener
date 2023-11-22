@@ -1,7 +1,4 @@
 using System.Diagnostics;
-using LinkShortener.Data;
-using LinkShortener.Data.Entities;
-using LinkShortener.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using LinkShortener.Models;
 
@@ -9,13 +6,6 @@ namespace LinkShortener.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
-    {
-        _logger = logger;
-    }
-
     public IActionResult Index()
     {
         return View();
