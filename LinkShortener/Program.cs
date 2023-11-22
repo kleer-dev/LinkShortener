@@ -1,6 +1,14 @@
+using LinkShortener.Data;
+using LinkShortener.Data.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ApplicationContext>();
+
+builder.Services.AddScoped<UrlRepository>();
+builder.Services.AddScoped<ApplicationContext>();
 
 var app = builder.Build();
 
