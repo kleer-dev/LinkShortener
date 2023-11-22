@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 
 namespace LinkShortener.Services;
 
@@ -7,7 +8,7 @@ public class LinkShorterService
     public string GenerateShortLink(string url, int length)
     {
         var inputBytes = Encoding.UTF8.GetBytes(url);
-        var keyBytes = Encoding.UTF8.GetBytes(DateTime.Now.Ticks.ToString());
+        var keyBytes = Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());
 
         var encryptedBytes = new byte[inputBytes.Length];
 
