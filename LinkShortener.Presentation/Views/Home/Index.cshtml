@@ -1,0 +1,53 @@
+﻿@model IEnumerable<LinkShortener.Data.Entities.Url>
+
+@{
+    ViewData["Title"] = "Ссылки";
+}
+
+<h1 class="text-center">Ссылки</h1>
+
+<div class="my-table">
+    <table class="table">
+        <tr>
+            <td>Id</td>
+            <td>Полная ссылка</td>
+            <td>Короткая ссылка</td>
+            <td>Дата создания</td>
+            <td>Количество переходов</td>
+            <td></td>
+            <td></td>
+        </tr>
+        
+        @foreach (var url in Model)
+        {
+            <tr>
+                <td>@url.Id</td>
+                <td>@url.LongUrl</td>
+                <td>
+                    <a asp-controller="Home"
+                       asp-action="ShortLink"
+                       asp-route-shortLink="@url.ShortenedUrl">
+                        @url.ShortenedUrl
+                    </a>
+                </td>
+                <td>@url.DateOfCreation</td>
+                <td>@url.TransitionCount</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="EditUrl" asp-action="Index" asp-route-id="@url.Id">
+                        Изменить
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@url.Id">
+                        Удалить
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+    
+    @if (!Model.Any())
+    {
+        <div class="text-center fw-bold">Нет добавленных ссылок!</div>
+    }
+</div>
