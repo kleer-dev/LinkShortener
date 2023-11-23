@@ -1,5 +1,6 @@
 ﻿using LinkShortener.Data.Entities;
 using LinkShortener.Data.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace LinkShortener.Data.Repositories;
 
@@ -23,7 +24,7 @@ public class UrlRepository(ApplicationContext dbContext) : IRepository<Url>
         dbContext.SaveChanges();
     }
 
-    public IEnumerable<Url> GetAll() => dbContext.Urls.ToList();
+    public async Task<IEnumerable<Url>> GetAll() => await dbContext.Urls.ToListAsync();
 
     public Url? GetById(int id) =>
         dbContext.Urls.FirstOrDefault(url => url.Id == id);

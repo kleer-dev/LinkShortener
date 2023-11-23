@@ -1,0 +1,15 @@
+﻿@model UrlViewModel
+
+<h1 class="text-center">Добавление ссылки</h1> 
+
+<form asp-controller="AddUrl" asp-action="Add" method="post">
+    <div class="input-group">
+        <input class="form-control" type="text" placeholder="Ссылка" asp-for="LongUrl">
+        <span class="input-group-text" id="basic-addon1">
+            <button class="btn btn-success" type="submit">Добавить</button>
+        </span>
+    </div>
+    
+    <span class="fw-bold text-danger" asp-validation-for="LongUrl"></span>
+</form>
+

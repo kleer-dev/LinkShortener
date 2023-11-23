@@ -1,24 +1,32 @@
-using System.Diagnostics;
+using LinkShortener.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using LinkShortener.Models;
 
 namespace LinkShortener.Controllers;
 
-public class HomeController : Controller
+public class HomeController(UrlRepository urlRepository) : Controller
 {
-    public IActionResult Index()
+    public async Task<ViewResult> Index() => View(await urlRepository.GetAll());
+
+    public IActionResult Delete(int id)
     {
-        return View();
+        var url = urlRepository.GetById(id);
+
+        if (url is not null)
+        {
+            urlRepository.Delete(url);
+        }
+
+        return RedirectToAction("Index");
     }
 
-    public IActionResult Privacy()
+    public async Task<IActionResult> ShortLink(string shortLink)
     {
-        return View();
-    }
+        var url = (await urlRepository.GetAll())
+            .First(link => link.ShortenedUrl == shortLink);
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        url.TransitionCount++;
+        urlRepository.Update(url);
+        
+        return Redirect(url.LongUrl);
     }
 }
