@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LinkShortener.Models;
+namespace LinkShortener.Presentation.Models;
 
 public class UrlViewModel
 {

@@ -1,16 +1,17 @@
-﻿using LinkShortener.Data.Repositories;
-using LinkShortener.Models;
-using LinkShortener.Services;
+﻿using AutoMapper;
+using LinkShortener.Application.Interfaces;
+using LinkShortener.Data.Entities;
+using LinkShortener.Presentation.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LinkShortener.Controllers;
+namespace LinkShortener.Presentation.Controllers;
 
-public class EditUrlController(UrlRepository urlRepository,
-    LinkShorterService linkShorterService) : Controller
+public class EditUrlController(IUrlService urlService,
+    IMapper mapper) : Controller
 {
     public IActionResult Index(int id)
     {
-        var url = urlRepository.GetById(id);
+        var url = urlService.GetById(id);
 
         if (url is null)
         {
@@ -32,7 +33,7 @@ public class EditUrlController(UrlRepository urlRepository,
         if (!ModelState.IsValid)
             return View("Index", urlViewModel);
 
-        var url = urlRepository.GetById(urlViewModel.Id);
+        var url = mapper.Map<Url>(urlViewModel);
 
         if (url is null)
         {
@@ -40,12 +41,8 @@ public class EditUrlController(UrlRepository urlRepository,
                 "Ссылка с данным идентификатором не найдена");
             return View("Index", urlViewModel);
         }
-
-        url.LongUrl = urlViewModel.LongUrl;
-        url.ShortenedUrl = linkShorterService.GenerateShortLink(urlViewModel.LongUrl, 8);
-        url.DateOfCreation = DateTime.Now;
         
-        urlRepository.Update(url);
+        urlService.Update(url);
 
         return RedirectToAction("Index", "Home");
     }

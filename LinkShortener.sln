@@ -1,8 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkShortener", "LinkShortener\LinkShortener.csproj", "{6900CA45-5732-48A6-B0C3-A956E139C86C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkShortener.Presentation", "LinkShortener.Presentation\LinkShortener.Presentation.csproj", "{6900CA45-5732-48A6-B0C3-A956E139C86C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkShortener.Data", "LinkShortener.Data\LinkShortener.Data.csproj", "{E8D01B7D-DEEE-4545-A090-F7FBC082AB18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkShortener.Application", "LinkShortener.Application\LinkShortener.Application.csproj", "{42013709-69CC-45F0-9136-EBFD45EAE6CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +20,9 @@ Global
 		{E8D01B7D-DEEE-4545-A090-F7FBC082AB18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8D01B7D-DEEE-4545-A090-F7FBC082AB18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8D01B7D-DEEE-4545-A090-F7FBC082AB18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42013709-69CC-45F0-9136-EBFD45EAE6CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42013709-69CC-45F0-9136-EBFD45EAE6CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42013709-69CC-45F0-9136-EBFD45EAE6CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42013709-69CC-45F0-9136-EBFD45EAE6CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
