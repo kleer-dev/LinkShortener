@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LinkShortener.Data.Entities;
 
 namespace LinkShortener.Data.Interfaces;
 
-public interface IRepository<in T>
+public interface IRepository<T>
 {
     public void Add(T entity);
     public void Delete(T entity);
     public void Update(T entity);
+    public Task<IEnumerable<Url>> GetAll();
+    public T? GetById(int id);
 }

@@ -1,16 +1,21 @@
+using LinkShortener.Application.Interfaces;
+using LinkShortener.Application.Services;
 using LinkShortener.Data;
+using LinkShortener.Data.Entities;
+using LinkShortener.Data.Interfaces;
 using LinkShortener.Data.Repositories;
-using LinkShortener.Services;
+using LinkShortener.Presentation;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationContext>();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-builder.Services.AddScoped<UrlRepository>();
-builder.Services.AddScoped<ApplicationContext>();
-builder.Services.AddScoped<LinkShorterService>();
+builder.Services.AddScoped<IRepository<Url>, UrlRepository>();
+builder.Services.AddScoped<ILinkShorterService, LinkShorterService>();
+builder.Services.AddScoped<IUrlService, UrlService>();
 
 var app = builder.Build();
 

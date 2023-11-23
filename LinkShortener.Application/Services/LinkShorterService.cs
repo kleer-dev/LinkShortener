@@ -1,9 +1,9 @@
-﻿using System.Globalization;
-using System.Text;
+﻿using System.Text;
+using LinkShortener.Application.Interfaces;
 
-namespace LinkShortener.Services;
+namespace LinkShortener.Application.Services;
 
-public class LinkShorterService
+public class LinkShorterService : ILinkShorterService
 {
     public string GenerateShortLink(string url, int length)
     {
